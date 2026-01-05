@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Toss & Stopwatch App</title>
+  <title>Arjun's Toss Timer</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="startClock()">
 
-  <h1 class="title">Online Toss & Timer App</h1>
+  <h1 class="title">Arjun's Toss & Stopwatch</h1>
 
   <!-- DATE & TIME -->
   <div class="clock">
@@ -34,7 +34,9 @@
   <div class="section">
     <h2>Stopwatch</h2>
 
-    <div id="stopwatch">00:00</div>
+    <div class="stopwatch-wrapper">
+      <div id="stopwatch" class="stopwatch-display">00:00:00</div>
+    </div>
 
     <button onclick="startWatch()">Start</button>
     <button onclick="stopWatch()">Stop</button>

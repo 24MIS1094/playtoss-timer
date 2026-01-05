@@ -1,4 +1,4 @@
-/* DATE & TIME (INDIA) */
+/* ===== DATE & TIME (INDIA) ===== */
 function startClock() {
   setInterval(() => {
     const now = new Date();
@@ -16,7 +16,7 @@ function startClock() {
   }, 1000);
 }
 
-/* COIN TOSS */
+/* ===== COIN TOSS ===== */
 let flipping = false;
 
 function flipCoin() {
@@ -38,7 +38,7 @@ function flipCoin() {
   }, 1800);
 }
 
-/* STOPWATCH WITH MILLISECONDS */
+/* ===== STOPWATCH WITH ANIMATION + MILLISECONDS ===== */
 let minutes = 0;
 let seconds = 0;
 let milliseconds = 0;
@@ -46,6 +46,11 @@ let stopwatchTimer = null;
 
 function startWatch() {
   if (stopwatchTimer) return;
+
+  const display = document.getElementById("stopwatch");
+  const wrapper = document.querySelector(".stopwatch-wrapper");
+
+  wrapper.classList.add("running");
 
   stopwatchTimer = setInterval(() => {
     milliseconds += 10;
@@ -60,10 +65,12 @@ function startWatch() {
       minutes++;
     }
 
-    document.getElementById("stopwatch").innerText =
+    display.innerHTML =
       String(minutes).padStart(2, "0") + ":" +
       String(seconds).padStart(2, "0") + ":" +
-      String(milliseconds / 10).padStart(2, "0");
+      "<span class='ms'>" +
+      String(milliseconds / 10).padStart(2, "0") +
+      "</span>";
 
   }, 10);
 }
@@ -71,6 +78,7 @@ function startWatch() {
 function stopWatch() {
   clearInterval(stopwatchTimer);
   stopwatchTimer = null;
+  document.querySelector(".stopwatch-wrapper").classList.remove("running");
 }
 
 function resetWatch() {
