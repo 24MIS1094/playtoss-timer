@@ -27,7 +27,7 @@ function flipCoin() {
   const resultText = document.getElementById("tossResult");
 
   const result = Math.random() < 0.5 ? "HEADS" : "TAILS";
-  const spins = Math.random() < 0.5 ? 1080 : 1440; // 3–4 rotations
+  const spins = Math.random() < 0.5 ? 1080 : 1440;
 
   coin.style.transform =
     "rotateY(" + (spins + (result === "TAILS" ? 180 : 0)) + "deg)";
@@ -38,28 +38,45 @@ function flipCoin() {
   }, 1800);
 }
 
-/* STOPWATCH */
+/* STOPWATCH WITH MILLISECONDS */
+let minutes = 0;
 let seconds = 0;
-let timer = null;
+let milliseconds = 0;
+let stopwatchTimer = null;
 
 function startWatch() {
-  if (timer) return;
+  if (stopwatchTimer) return;
 
-  timer = setInterval(() => {
-    seconds++;
+  stopwatchTimer = setInterval(() => {
+    milliseconds += 10;
+
+    if (milliseconds === 1000) {
+      milliseconds = 0;
+      seconds++;
+    }
+
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+    }
+
     document.getElementById("stopwatch").innerText =
-      String(Math.floor(seconds / 60)).padStart(2, "0") + ":" +
-      String(seconds % 60).padStart(2, "0");
-  }, 1000);
+      String(minutes).padStart(2, "0") + ":" +
+      String(seconds).padStart(2, "0") + ":" +
+      String(milliseconds / 10).padStart(2, "0");
+
+  }, 10);
 }
 
 function stopWatch() {
-  clearInterval(timer);
-  timer = null;
+  clearInterval(stopwatchTimer);
+  stopwatchTimer = null;
 }
 
 function resetWatch() {
   stopWatch();
+  minutes = 0;
   seconds = 0;
-  document.getElementById("stopwatch").innerText = "00:00";
+  milliseconds = 0;
+  document.getElementById("stopwatch").innerText = "00:00:00";
 }
